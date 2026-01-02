@@ -266,6 +266,7 @@ def run_build(build_dir: Path, args: Args) -> None:
         "gen",
         str(build_dir),
         "--check",
+        "-vv",
         f"--args={args_text}",
         cwd=get_v8_path(),
     )
