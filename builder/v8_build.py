@@ -274,7 +274,7 @@ def run_build(build_dir: Path, args: Args) -> None:
     run(
         executable,
         str(get_depot_tools_path() / "ninja.py"),
-        # "-vv",  # too much spam for GitHub Actions
+        "-vv",
         "-C",
         str(build_dir),
         str(Path("custom_deps") / "mini_racer"),
