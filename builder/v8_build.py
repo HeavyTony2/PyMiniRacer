@@ -253,7 +253,7 @@ def run_build(build_dir: Path, args: Args) -> None:
         run(
             executable,
             "build/linux/sysroot_scripts/install-sysroot.py",
-            "--arch=" + target_cpu,
+            "--arch=ppc64el",
             cwd=get_v8_path(),
         )
 
