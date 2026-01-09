@@ -231,6 +231,7 @@ def run_build(build_dir: Path, args: Args) -> None:
         # ... from within the v8 directory.
         "is_debug": "false",
         "v8_use_external_startup_data": "false",
+        "v8_enable_temporal_support": "false",
         "v8_monolithic": "true",
         # From https://groups.google.com/g/v8-users/c/qDJ_XYpig_M/m/qe5XO9PZAwAJ:
         "v8_monolithic_for_shared_library": "true",
@@ -253,7 +254,7 @@ def run_build(build_dir: Path, args: Args) -> None:
         run(
             executable,
             "build/linux/sysroot_scripts/install-sysroot.py",
-            "--arch=" + target_cpu,
+            "--arch=ppc64el"
             cwd=get_v8_path(),
         )
 
