@@ -249,13 +249,13 @@ def run_build(build_dir: Path, args: Args) -> None:
         # https://gitlab.alpinelinux.org/alpine/aports/-/issues/16210
         opts["v8_enable_partition_alloc"] = "false"
 
-   # if is_linux() and target_cpu != get_local_v8_target_cpu():
-     #   run(
-      #      executable,
-      #      "build/linux/sysroot_scripts/install-sysroot.py",
-      #      "--arch=" + target_cpu,
-       #     cwd=get_v8_path(),
-       # )
+    if is_linux() and target_cpu != get_local_v8_target_cpu():
+        run(
+            executable,
+            "build/linux/sysroot_scripts/install-sysroot.py",
+            "--arch=" + target_cpu,
+            cwd=get_v8_path(),
+        )
 
     args_text = " ".join(f"{n}={v}" for n, v in opts.items())
 
