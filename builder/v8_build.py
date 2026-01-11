@@ -24,7 +24,7 @@ basicConfig()
 LOGGER = getLogger(__name__)
 LOGGER.setLevel(DEBUG)
 ROOT_DIR = Path(__file__).absolute().parents[1]
-V8_VERSION = "branch-heads/14.4"
+V8_VERSION = "branch-heads/14.3"
 
 
 @cache
@@ -61,10 +61,6 @@ def get_local_v8_target_cpu() -> str:
         return "s390x"
     if m == "ppc64":
         return "ppc64"
-    if m == "ppc64le":
-        return "powerpc64le"
-    if m == "powerpc64le":
-        return "powerpc64le"      
 
     raise UnknownArchError(m)
 
@@ -239,7 +235,7 @@ def run_build(build_dir: Path, args: Args) -> None:
         # From https://groups.google.com/g/v8-users/c/qDJ_XYpig_M/m/qe5XO9PZAwAJ:
         "v8_monolithic_for_shared_library": "true",
         "target_cpu": f'"{target_cpu}"',
-        "v8_target_cpu": f'"{v8_target_cpu}"',
+        "v8_target_cpu": f'"{target_cpu}"',
         # We sneak our C++ frontend into V8 as a symlinked "custom_dep" so
         # that we can reuse the V8 build system to make our dynamic link
         # library:
@@ -270,7 +266,6 @@ def run_build(build_dir: Path, args: Args) -> None:
         "gen",
         str(build_dir),
         "--check",
-        "-vv",
         f"--args={args_text}",
         cwd=get_v8_path(),
     )
@@ -279,7 +274,7 @@ def run_build(build_dir: Path, args: Args) -> None:
     run(
         executable,
         str(get_depot_tools_path() / "ninja.py"),
-        "-vv",
+        # "-vv",  # too much spam for GitHub Actions
         "-C",
         str(build_dir),
         str(Path("custom_deps") / "mini_racer"),
@@ -295,7 +290,6 @@ class Args:
     fetch_only: bool
     skip_fetch: bool
     aarch64_musl_compat: bool
-    v8_target_cpu: str | None
 
 
 def build_v8(args: Args) -> None:
