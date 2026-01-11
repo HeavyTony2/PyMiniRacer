@@ -239,7 +239,7 @@ def run_build(build_dir: Path, args: Args) -> None:
         # From https://groups.google.com/g/v8-users/c/qDJ_XYpig_M/m/qe5XO9PZAwAJ:
         "v8_monolithic_for_shared_library": "true",
         "target_cpu": f'"{target_cpu}"',
-        "v8_target_cpu": f'"{target_cpu}"',
+        "v8_target_cpu": f'"{v8_target_cpu}"',
         # We sneak our C++ frontend into V8 as a symlinked "custom_dep" so
         # that we can reuse the V8 build system to make our dynamic link
         # library:
@@ -295,7 +295,7 @@ class Args:
     fetch_only: bool
     skip_fetch: bool
     aarch64_musl_compat: bool
-    v8_target_cpu: bool
+    v8_target_cpu: str | None
 
 
 def build_v8(args: Args) -> None:
