@@ -61,10 +61,6 @@ def get_local_v8_target_cpu() -> str:
         return "s390x"
     if m == "ppc64":
         return "ppc64"
-    if m == "ppc64le":
-        return "powerpc64le"
-    if m == "powerpc64le":
-        return "powerpc64le"      
 
     raise UnknownArchError(m)
 
@@ -295,7 +291,6 @@ class Args:
     fetch_only: bool
     skip_fetch: bool
     aarch64_musl_compat: bool
-    v8_target_cpu: bool
 
 
 def build_v8(args: Args) -> None:
