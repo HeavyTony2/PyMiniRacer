@@ -234,8 +234,7 @@ def run_build(build_dir: Path, args: Args) -> None:
         "v8_monolithic": "true",
         # From https://groups.google.com/g/v8-users/c/qDJ_XYpig_M/m/qe5XO9PZAwAJ:
         "v8_monolithic_for_shared_library": "true",
-        "target_cpu": f'"{target_cpu}"',
-        "v8_target_cpu": f'"{target_cpu}"',
+        "v8_target_cpu": "powerpc64le",
         # We sneak our C++ frontend into V8 as a symlinked "custom_dep" so
         # that we can reuse the V8 build system to make our dynamic link
         # library:
